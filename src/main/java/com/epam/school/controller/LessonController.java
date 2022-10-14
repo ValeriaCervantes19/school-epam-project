@@ -102,7 +102,7 @@ public class LessonController {
 			lessons = lessonService.findByGrade(findLesson.getGrade());
 			if(lessons != null) {
 				model.addAttribute("lessons", lessons);
-				return "lessons.html";
+				return "lessons.html ";
 			}
 		}	
 		
