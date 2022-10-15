@@ -26,7 +26,7 @@ public class SchoolUserDetailsService implements UserDetailsService{
 		}
 		UserDetails userDetails = User.withDefaultPasswordEncoder().username(user.getUsername()).
 				password(user.getPassword()).authorities("USER").build();
-		//GrantedAuthority granted = new SimpleGrantedAuthority("ROL"); // pasar toda la colección
+		//GrantedAuthority granted  = new SimpleGrantedAuthority("ROL"); // pasar toda la colección
 		return userDetails;							
 	}
 }
