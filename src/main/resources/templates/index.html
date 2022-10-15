@@ -1,26 +1,12 @@
-<!-- <!DOCTYPE HTML> -->
-<!-- <html> -->
-<!-- <head>  -->
-<!--     <title>School project</title>  -->
-<!--     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> -->
-<!-- </head> -->
-<!-- <body> -->
-<!-- <div class="container"> -->
-<!-- 	<p>Teachers menu <a href="/teacher/list">here</a></p> -->
-<!--     <p>Students menu <a href="/student/list">here</a></p> -->
-<!--     <p>Lessons menu <a href="/lesson/list">here</a></p> -->
-<!-- </div> -->
-<!-- </body> -->
-<!-- </html> -->
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
 <title>School project</title>
-<link href="static/images/logo.png" rel="icon"/>
+<link href="images/logo.png" rel="icon"/>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
 <body>
@@ -39,6 +25,10 @@
     <a href="/teacher/list" class="w3-bar-item w3-button"> TEACHERS</a>
     <a href="/student/list" class="w3-bar-item w3-button"> STUDENTS</a>
     <a href="/lesson/list" class="w3-bar-item w3-button"> LESSONS</a>
+    <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+     <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+  </form>
   </div>
 </header>
 

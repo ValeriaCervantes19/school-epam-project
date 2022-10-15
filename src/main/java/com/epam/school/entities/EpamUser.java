@@ -10,23 +10,21 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames= "email"),catalog = "school_epam_project")
-public class User implements java.io.Serializable {
+public class EpamUser implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private String name;
-	private String lastName;
+	private String username;
 	private String email;
 	private String password;
 
-	public User(String name, String lastName, String email, String password) {
-		this.name = name;
-		this.lastName = lastName;
+	public EpamUser(String username, String email, String password) {
+		this.username = username;
 		this.email = email;
 		this.password = password;
 	}
 
-	public User() {
+	public EpamUser() {
 	}
 
 	@Id
@@ -41,22 +39,13 @@ public class User implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "name", nullable = false, length = 45)
-	public String getName() {
-		return this.name;
+	@Column(name = "username", nullable = false, length = 45)
+	public String getUsername() {
+		return this.username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	@Column(name = "lastName", nullable = false, length = 45)
-	public String getLastName() {
-		return this.lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	@Column(name = "email", nullable = false, length = 45)
