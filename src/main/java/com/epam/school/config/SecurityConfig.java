@@ -11,7 +11,7 @@ import com.epam.school.service.impl.SchoolUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig { //extends WebSecurityConfigurerAdapter {
 	
 	@Autowired 
 	SchoolUserDetailsService userDetails;
@@ -19,10 +19,20 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
-			.authorizeHttpRequests((requests) -> requests
-				.antMatchers("/images/**").permitAll()
-				.antMatchers("/", "/index").authenticated()
-				.anyRequest().authenticated()
+			.authorizeHttpRequests((requests) -> {
+				try {
+					requests
+						.antMatchers("/images/**","signUp.html").permitAll()
+						.antMatchers("/", "/index").authenticated()
+						.antMatchers("/student/*").hasRole("STUDENT")
+						.antMatchers("/teacher/*").hasRole("TEACHER")
+						.anyRequest().authenticated()
+						.and()
+						.exceptionHandling().accessDeniedPage("/error.html");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 			)
 			.formLogin((form) -> form
 				.loginPage("/login")
@@ -33,7 +43,20 @@ public class SecurityConfig {
 			.logout((logout) -> logout.permitAll());
 		return http.build();
 	}
-
+	
+	
+//	@Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+//
+//    @Bean
+//    @Override
+//    protected AuthenticationManager authenticationManager() throws Exception {
+//        return super.authenticationManager();
+//    }
+    
+	
 //	@Bean
 //	public UserDetailsService userDetailsService() {
 //		UserDetails user =
@@ -46,6 +69,4 @@ public class SecurityConfig {
 //		return new InMemoryUserDetailsManager(user);
 //	}
 	
-	
-
 }

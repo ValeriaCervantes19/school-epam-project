@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.epam.school.dto.TeacherUserDTO;
+import com.epam.school.entities.EpamUser;
 import com.epam.school.entities.Teacher;
 import com.epam.school.repository.TeacherRepository;
+import com.epam.school.repository.UserRepository;
 import com.epam.school.service.TeacherService;
 
 @Service
@@ -15,18 +18,34 @@ public class TeacherServiceImpl implements TeacherService{
 	@Autowired
 	TeacherRepository teacherRepository;
 	
+	@Autowired
+	UserRepository userRepository;
+	
 	@Override
-	public void save(Teacher teacher) {
-		teacherRepository.save(teacher);
+	public void registerTeacher(TeacherUserDTO dto) {
+		EpamUser user= new EpamUser();
+		user.setUsername(dto.getUsername());
+		user.setEmail(dto.getEmail());
+		user.setPassword(dto.getPassword());
+		user.setRole("ROLE_TEACHER");
+		
+		EpamUser epamUser = userRepository.save(user);		
+		
+		Teacher teacher = new Teacher();
+		teacher.setName(dto.getName());
+		teacher.setLastname(dto.getLastname());
+		teacher.setUser(epamUser);
+		epamUser.setTeacher(teacher);
+		userRepository.save(epamUser);
+		
 	}
 
 	@Override
-	public void edit(Integer id, Teacher teacher) {
+	public void edit(Integer id, TeacherUserDTO teacher) {
 		Teacher found = teacherRepository.findById(id).get();
 		found.setName(teacher.getName());
-		found.setLastName(teacher.getLastName());
-		found.setStudents(teacher.getStudents());
-		save(teacher);
+		found.setLastname(teacher.getLastname());
+		teacherRepository.save(found);
 	}
 
 	@Override
@@ -50,8 +69,8 @@ public class TeacherServiceImpl implements TeacherService{
 	}
 
 	@Override
-	public List<Teacher> findByLastName(String lastName) {
-		return teacherRepository.findByLastName(lastName);
+	public List<Teacher> findByLastname(String lastName) {
+		return teacherRepository.findByLastname(lastName);
 	}
 
 }

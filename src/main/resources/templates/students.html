@@ -1,58 +1,3 @@
-<!-- <html xmlns:th="http://www.thymeleaf.org"> -->
-
-<!-- <head> -->
-<!-- <title>School project</title> -->
-<!-- <link href= "images/logo.png" rel="icon"/> -->
-<!-- </head> -->
-
-<!-- <body> -->
-<!-- <h1>STUDENT</h1> -->
-<!-- <br> -->
-<!-- <table border="2"> -->
-<!-- 	<tr> -->
-<!-- 		<th>Id</th> -->
-<!-- 		<th>Name</th> -->
-<!-- 		<th>Last Name</th> -->
-<!-- 		<th>Id Teacher</th> -->
-<!-- 		<th>Id Lesson</th> -->
-<!-- 	</tr> -->
-<!-- 	<tr th:each="student: ${students}"> -->
-<!-- 		<td th:text="${student.id}" /> -->
-<!-- 	    <td th:text="${student.name}" /> -->
-<!-- 	    <td th:text="${student.lastname}" /> -->
-<!-- 	    <td th:text="${student.teacher.getId()}" /> -->
-<!-- 	    <td th:text="${student.lesson.getId()}" /> -->
-
-<!-- 	</tr> -->
-<!-- </table> -->
-<!-- <br> -->
-<!-- <h3>Create Student</h3> -->
-<!-- <form th:action="@{/student/create}" th:object="${newStudent}" method="post"> -->
-<!--     	<p>Name: <input type="text" th:field="*{name}" /></p> -->
-<!--         <p>Last name: <input type="text" th:field="*{lastname}" /></p> -->
-<!--         <p>Id teacher: <input type="text" th:field="*{teacher}" /></p> -->
-<!--         <p>Id lesson: <input type="text" th:field="*{lesson}" /></p> -->
-<!--         <p><input type="submit" value="Submit" /> -->
-<!-- </form> -->
-<!-- <br> -->
-<!-- <h3>Update Student</h3> -->
-<!-- <form th:action="@{/student/update}" th:object="${updateStudent}" method="post"> -->
-<!-- 		<p>Id: <input type="text" th:field="*{id}" /></p> -->
-<!--     	<p>Name: <input type="text" th:field="*{name}" /></p> -->
-<!--         <p>Last name: <input type="text" th:field="*{lastname}" /></p> -->
-<!--         <p>Id teacher: <input type="text" th:field="*{teacher}" /></p> -->
-<!--         <p>Id lesson: <input type="text" th:field="*{lesson}" /></p> -->
-<!--         <p><input type="submit" value="Submit" /> -->
-<!-- </form> -->
-<!-- <br> -->
-<!-- <h3>Delete Student</h3> -->
-<!-- <form th:action="@{/student/delete}" th:object="${deleteStudent}" method="post"> -->
-<!--         <p>Id: <input type="text" th:field="*{id}" /></p> -->
-<!--         <p><input type="submit" value="Submit" /> -->
-<!-- </form> -->
-<!-- </body> -->
-<!-- </html> -->
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -129,8 +74,8 @@
 			class="w3-light-grey w3-padding-large w3-padding-32 w3-margin-top"
 			id="create">
 			<h3 class="w3-center">Create Student</h3>
-			<form th:action="@{/student/create}" th:object="${newStudent}"
-				method="post" target="_blank">
+			<form th:action="@{/student/create}" th:object="${studentDto}"
+				method="post">
 				<div class="w3-section">
 					<label>Name</label> <input class="w3-input w3-border" type="text"
 						th:field="*{name}">
@@ -141,11 +86,23 @@
 				</div>
 				<div class="w3-section">
 					<label>Id Teacher</label> <input class="w3-input w3-border"
-						type="text" th:field="*{teacher}">
+						type="text" th:field="*{teacher.id}">
 				</div>
 				<div class="w3-section">
 					<label>Id Lesson</label> <input class="w3-input w3-border"
-						type="text" th:field="*{lesson}">
+						type="text" th:field="*{lesson.id}">
+				</div>
+				<div class="w3-section">
+					<label>Username</label> <input class="w3-input w3-border"
+						type="text" th:field="*{username}"> <br>
+				</div>
+				<div class="w3-section">
+					<label>Email</label> <input class="w3-input w3-border"
+						type="email" th:field="*{email}"> <br>
+				</div>
+				<div class="w3-section">
+					<label>Password</label> <input class="w3-input w3-border"
+						type="password" th:field="*{password}"> <br>
 				</div>
 				<button type="submit" class="w3-button w3-block w3-dark-grey">Send</button>
 			</form>
@@ -159,8 +116,8 @@
 			class="w3-light-grey w3-padding-large w3-padding-32 w3-margin-top"
 			id="update">
 			<h3 class="w3-center">Update Student</h3>
-			<form th:action="@{/student/update}" th:object="${updateStudent}"
-				method="post" target="_blank">
+			<form th:action="@{/student/update}" th:object="${studentDto}"
+				method="post">
 				<div class="w3-section">
 					<label>Id</label> <input class="w3-input w3-border" type="text"
 						th:field="*{id}">
@@ -193,8 +150,8 @@
 			class="w3-light-grey w3-padding-large w3-padding-32 w3-margin-top"
 			id="delete">
 			<h3 class="w3-center">Delete Student</h3>
-			<form th:action="@{/student/delete}" th:object="${deleteStudent}"
-				method="post" target="_blank">
+			<form th:action="@{/student/delete}" th:object="${studentDto}"
+				method="post">
 				<div class="w3-section">
 					<label>Id</label> <input class="w3-input w3-border" type="text"
 						th:field="*{id}">
@@ -211,7 +168,7 @@
 			class="w3-light-grey w3-padding-large w3-padding-32 w3-margin-top"
 			id="search">
 			<h3 class="w3-center">Search Student</h3>
-			<form th:action="@{/student/find}" th:object="${findStudent}"
+			<form th:action="@{/student/find}" th:object="${studentDto}"
 				method="post">
 				<div class="w3-section">
 					<label>Id</label> <input class="w3-input w3-border" type="text"

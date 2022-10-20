@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>School project-login</title>
-<link href="images/logo.png" rel="icon"/>
+<link href="/images/logo.png" rel="icon" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -37,22 +37,30 @@ body, html {
 				class="w3-light-gray w3-padding-large w3-padding-32 w3-margin-top w3-opacity-min w3-animate-zoom"
 				id="login">
 				<h1 class="w3-center">Hello There!</h1>
-				<h5 class="w3-center">Before using our services you need to create an account</h5>
-							<form th:action="@{/login}" th:object="${user}" method="post">
-								<div class="w3-section">
-									<label>Username</label> <input class="w3-input w3-border" type="text"
-										th:field="*{username}">
-								</div>
-								<div class="w3-section">
-									<label>Email</label> <input class="w3-input w3-border" type="email"
-										th:field="*{email}">
-								</div>
-								<div class="w3-section">
-									<label>Password</label> <input class="w3-input w3-border" type="password"
-										th:field="*{password}">
-								</div>
-				<button type="submit" class="w3-button w3-block w3-gray">Log in</button>
-				<!-- 			</form> -->
+				<h5 class="w3-center">Before using our services you need to
+					create an account</h5>
+				<form th:action="@{/signUp}" th:object="${newUser}" method="post">
+					<div class="w3-section">
+						<label>Username</label> <input class="w3-input w3-border"
+							type="text" th:field="*{username}">
+					</div>
+					<div class="w3-section">
+						<label>Email</label> <input class="w3-input w3-border"
+							type="email" th:field="*{email}">
+					</div>
+					<div class="w3-section">
+						<label>Password</label> <input class="w3-input w3-border"
+							type="password" th:field="*{password}">
+					</div>
+					<div class="w3-section">
+						<select class="w3-input w3-border" th:field="*{role}">
+							<option disabled selected="">Select a role</option>
+							<option>STUDENT</option>
+							<option>TEACHER</option>
+						</select>
+					</div>
+					<button type="submit" class="w3-button w3-block w3-gray">Create account</button>
+				</form>
 			</div>
 
 		</div>

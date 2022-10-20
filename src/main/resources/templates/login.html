@@ -31,7 +31,6 @@ body, html {
 		class="bgimg w3-display-container w3-animate-opacity w3-text-white">
 		<div class="w3-display-topleft w3-padding-large w3-xlarge"></div>
 		<div class="w3-display-middle">
-			<!-- fields -->
 			<br>
 			<div
 				class="w3-light-gray w3-padding-large w3-padding-32 w3-margin-top w3-opacity-min w3-animate-zoom"
@@ -49,12 +48,15 @@ body, html {
 				<button type="submit" class="w3-button w3-block w3-gray">Log in</button>
 				<!-- 			</form> -->
 			</div>
-			<div th:if="${param.error}">
-            	Invalid username and password.
-        	</div>
-			<div th:if="${param.logout}">
-           		 You have been logged out.
-        	</div>
+			<br>
+				<div th:if="${param.error}" class="w3-light-gray w3-padding-large w3-padding-32 w3-margin-top w3-animate-zoom w3-center"
+				id="messages">
+	            	Invalid username and password.
+	        	</div>
+				<div th:if="${param.logout}" class="w3-light-gray w3-padding-large w3-padding-32 w3-margin-top w3-animate-zoom w3-center"
+				id="messages">
+	           		 You have been logged out.
+	        	</div>
 			
 
 		</div>

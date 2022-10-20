@@ -1,16 +1,13 @@
-package com.epam.school.entities;
-// Generated Oct 17, 2022, 7:20:08 PM by Hibernate Tools 4.3.6.Final
+package com.epam.school;
+// Generated Oct 18, 2022, 9:35:45 AM by Hibernate Tools 4.3.6.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -19,9 +16,8 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "user", catalog = "school_epam_project", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
-public class EpamUser implements java.io.Serializable {
+public class User implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String username;
 	private String email;
@@ -30,17 +26,17 @@ public class EpamUser implements java.io.Serializable {
 	private Teacher teacher;
 	private Student student;
 
-	public EpamUser() {
+	public User() {
 	}
 
-	public EpamUser(String username, String email, String password, String role) {
+	public User(String username, String email, String password, String role) {
 		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.role = role;
 	}
 
-	public EpamUser(String username, String email, String password, String role, Teacher teacher, Student student) {
+	public User(String username, String email, String password, String role, Teacher teacher, Student student) {
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -97,8 +93,7 @@ public class EpamUser implements java.io.Serializable {
 		this.role = role;
 	}
 
-	@PrimaryKeyJoinColumn
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade=CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
 	public Teacher getTeacher() {
 		return this.teacher;
 	}
@@ -106,9 +101,8 @@ public class EpamUser implements java.io.Serializable {
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
 	}
-	
-	@PrimaryKeyJoinColumn
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade=CascadeType.ALL)
+
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
 	public Student getStudent() {
 		return this.student;
 	}

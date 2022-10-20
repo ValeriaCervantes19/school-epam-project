@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.epam.school.dto.StudentUserDTO;
+import com.epam.school.entities.EpamUser;
 import com.epam.school.entities.Student;
 import com.epam.school.repository.StudentRepository;
+import com.epam.school.repository.UserRepository;
 import com.epam.school.service.StudentService;
 
 @Service
@@ -14,19 +17,43 @@ public class StudentServiceImpl implements StudentService{
 	
 	@Autowired
 	StudentRepository studentRepository;
+	
+	@Autowired 
+	UserRepository userRepository;
 
 	@Override
+	public void registerStudent(StudentUserDTO dto) {
+		EpamUser user = new EpamUser();
+		user.setUsername(dto.getUsername());
+		user.setEmail(dto.getEmail());
+		user.setPassword(dto.getPassword());
+		user.setRole("ROLE_STUDENT");
+		
+		EpamUser epamUser = userRepository.save(user);
+		
+		Student student = new Student();
+		student.setName(dto.getName());
+		student.setLastname(dto.getLastname());
+		student.setUser(epamUser);
+		student.setTeacher(dto.getTeacher());
+		student.setLesson(dto.getLesson());
+		epamUser.setStudent(student);
+		userRepository.save(epamUser);
+	}
+	
+	//for testing
 	public void save(Student student) {
 		studentRepository.save(student);
 	}
 
 	@Override
-	public void edit(Integer id, Student student) {
+	public void edit(Integer id, StudentUserDTO dto) {
 		Student found = studentRepository.findById(id).get();
-		found.setTeacher(student.getTeacher());
-		found.setName(student.getName());
-		found.setLastname(student.getLastname());
-		save(student);
+		found.setTeacher(dto.getTeacher());
+		found.setLesson(dto.getLesson());
+		found.setName(dto.getName());
+		found.setLastname(dto.getLastname());
+		studentRepository.save(found);
 	}
 
 	@Override

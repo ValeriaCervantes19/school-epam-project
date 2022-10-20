@@ -7,4 +7,5 @@ import com.epam.school.entities.EpamUser;
 public interface UserRepository extends JpaRepository<EpamUser, Integer>{
 	
 	public EpamUser findByUsername(String username);
+	public EpamUser findByEmail(String email);
 }
