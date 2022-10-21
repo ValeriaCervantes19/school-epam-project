@@ -81,4 +81,15 @@ public class StudentServiceImpl implements StudentService{
 		return studentRepository.findByLastname(lastName);
 	}
 
+	//for testing
+	@Override
+	public void editS(Integer id, Student student) {
+		Student found = studentRepository.findById(id).get();
+		found.setTeacher(student.getTeacher());
+		found.setLesson(student.getLesson());
+		found.setName(student.getName());
+		found.setLastname(student.getLastname());
+		studentRepository.save(found);
+	}
+
 }

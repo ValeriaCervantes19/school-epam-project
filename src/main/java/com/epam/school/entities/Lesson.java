@@ -34,7 +34,7 @@ public class Lesson implements java.io.Serializable {
 		this.title = title;
 		this.grade = grade;
 	}
-
+	
 	public Lesson(String title, Float grade, Set<Student> students) {
 		this.title = title;
 		this.grade = grade;

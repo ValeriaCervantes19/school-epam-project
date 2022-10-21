@@ -9,6 +9,7 @@ public interface StudentService {
 
 	public void registerStudent(StudentUserDTO dto);
 	public void edit(Integer id, StudentUserDTO dto);
+	public void editS(Integer id, Student student);
 	public void delete(Integer id);
 	//for testing
 	public void save(Student student);
